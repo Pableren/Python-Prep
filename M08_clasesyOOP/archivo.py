@@ -1,38 +1,21 @@
 class Herramientas:
     def __init__(self, lista_numeros):
-        if (type(lista_numeros) != list):
-            self.lista = []
-            raise ValueError('Se ha creado una lista vacía. Se esperaba una lista de números enteros')  
-        else:
-            self.lista = lista_numeros
+        self.lista = lista_numeros
 
     def verifica_primo(self):
-        lista_primos = []
         for i in self.lista:
             if (self.__verifica_primo(i)):
-                lista_primos.append(True)
+                print('El elemento', i, 'SI es un numero primo')
             else:
-                lista_primos.append(False)
-        return lista_primos
+                print('El elemento', i, 'NO es un numero primo')
 
     def conversion_grados(self, origen, destino):
-        parametros_esperados = ['celsius','kelvin','farenheit']
-        lista_conversion = []
-        if str(origen) not in parametros_esperados:
-            print('Los parametros esperados son:', parametros_esperados)
-            return lista_conversion
-        if str(destino) not in parametros_esperados:
-            print('Los parametros esperados son:', parametros_esperados)
-            return lista_conversion
         for i in self.lista:
-            lista_conversion.append(self.__conversion_grados(i, origen, destino))
-        return lista_conversion
+            print(i, 'grados', origen, 'son', self.__conversion_grados(i, origen, destino),'grados',destino)
     
     def factorial(self):
-        lista_factorial = []
         for i in self.lista:
-            lista_factorial.append(self.__factorial(i))
-        return lista_factorial
+            print('El factorial de ', i, 'es', self.__factorial(i))
 
     def __verifica_primo(self, nro):
         es_primo = True
@@ -73,22 +56,30 @@ class Herramientas:
                 valor_destino = valor
             elif (destino == 'farenheit'):
                 valor_destino = (valor * 9 / 5) + 32
-            else:
+            elif (destino == 'kelvin'):
                 valor_destino = valor + 273.15
+            else:
+                print('Parámetro de Destino incorrecto')
         elif (origen == 'farenheit'):
             if (destino == 'celsius'):
                 valor_destino = (valor - 32) * 5 / 9
             elif (destino == 'farenheit'):
                 valor_destino = valor
-            else:
+            elif (destino == 'kelvin'):
                 valor_destino = ((valor - 32) * 5 / 9) + 273.15
-        else:
+            else:
+                print('Parámetro de Destino incorrecto')
+        elif (origen == 'kelvin'):
             if (destino == 'celsius'):
                 valor_destino = valor - 273.15
             elif (destino == 'farenheit'):
                 valor_destino = ((valor - 273.15) * 9 / 5) + 32
-            else:
+            elif (destino == 'kelvin'):
                 valor_destino = valor
+            else:
+                print('Parámetro de Destino incorrecto')
+        else:
+            print('Parámetro de Origen incorrecto')
         return valor_destino
 
     def __factorial(self, numero):
